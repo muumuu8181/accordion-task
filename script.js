@@ -211,15 +211,47 @@ class TaskUI {
         this.exportBtn.addEventListener('click', () => this.handleExport());
     }
 
-    handleExport() {
+    async handleExport() {
         const markdown = this.taskManager.exportToMarkdown();
-        const blob = new Blob([markdown], { type: 'text/markdown' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'tasks.md';
-        a.click();
-        URL.revokeObjectURL(url);
+
+        // GitHub Gistにアップロード
+        const gistData = {
+            description: 'タスクリスト - ' + new Date().toLocaleString('ja-JP'),
+            public: true,
+            files: {
+                'tasks.md': {
+                    content: markdown
+                }
+            }
+        };
+
+        try {
+            const response = await fetch('https://api.github.com/gists', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(gistData)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const gistUrl = result.html_url;
+
+                // 成功メッセージとURLをコピー
+                if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(gistUrl);
+                    alert(`✅ GitHubにアップロード成功！\n\nURL: ${gistUrl}\n\n（クリップボードにコピーしました）`);
+                } else {
+                    prompt('✅ GitHubにアップロード成功！\nURLをコピーしてください:', gistUrl);
+                }
+            } else {
+                throw new Error('アップロード失敗: ' + response.status);
+            }
+        } catch (error) {
+            alert('❌ アップロードエラー: ' + error.message);
+            console.error(error);
+        }
     }
 
     handleAddTask() {
