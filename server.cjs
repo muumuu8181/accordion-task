@@ -45,8 +45,8 @@ const server = http.createServer((req, res) => {
                 const tmpFile = path.join(__dirname, 'tasks-tmp.md');
                 fs.writeFileSync(tmpFile, markdown, 'utf8');
 
-                // gh gist createでアップロード
-                const result = execSync(`gh gist create "${tmpFile}" --public --desc "タスクリスト - ${new Date().toLocaleString('ja-JP')}"`, {
+                // gh gist createでアップロード（private）
+                const result = execSync(`gh gist create "${tmpFile}" --secret --desc "タスクリスト - ${new Date().toLocaleString('ja-JP')}"`, {
                     encoding: 'utf8'
                 });
 
