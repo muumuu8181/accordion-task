@@ -471,29 +471,63 @@ class TaskUI {
     }
 
     applyFilter() {
-        const allTaskItems = document.querySelectorAll('.task-item');
+        // フィルターなしの場合はすべて表示
+        if (!this.currentFilter) {
+            document.querySelectorAll('.task-item').forEach(item => {
+                item.style.display = '';
+            });
+            return;
+        }
 
-        allTaskItems.forEach(item => {
-            const header = item.querySelector('.task-header');
+        // 各タスクアイテムをチェック
+        const checkTask = (item) => {
+            const header = item.querySelector(':scope > .task-header');
             const priority1 = header.dataset.priority1;
             const priority2 = header.dataset.priority2;
 
-            let shouldShow = true;
+            let match = false;
 
             if (this.currentFilter === 'unset') {
-                // 未設定のみ
-                shouldShow = !priority1 || !priority2;
-            } else if (this.currentFilter) {
-                // S, A, B, C のいずれか
-                shouldShow = priority1 === this.currentFilter;
+                match = !priority1 || !priority2;
+            } else {
+                match = priority1 === this.currentFilter;
             }
 
-            if (shouldShow) {
+            // サブタスクをチェック
+            const subtasksContainer = item.querySelector(':scope > .subtasks');
+            let hasMatchingChild = false;
+
+            if (subtasksContainer) {
+                const childItems = subtasksContainer.querySelectorAll(':scope > .task-item');
+                childItems.forEach(child => {
+                    const childMatches = checkTask(child);
+                    if (childMatches) {
+                        hasMatchingChild = true;
+                    }
+                });
+            }
+
+            // 自分自身がマッチするか、子がマッチする場合は表示
+            if (match || hasMatchingChild) {
                 item.style.display = '';
+                // マッチする子がある場合は展開
+                if (hasMatchingChild && subtasksContainer) {
+                    subtasksContainer.classList.add('expanded');
+                    const toggleBtn = item.querySelector(':scope > .task-header .toggle-btn');
+                    if (toggleBtn) {
+                        toggleBtn.classList.remove('collapsed');
+                    }
+                }
+                return true;
             } else {
                 item.style.display = 'none';
+                return false;
             }
-        });
+        };
+
+        // トップレベルのタスクから開始
+        const topLevelTasks = this.taskListElement.querySelectorAll(':scope > .task-item');
+        topLevelTasks.forEach(task => checkTask(task));
     }
 }
 
