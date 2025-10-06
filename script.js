@@ -214,29 +214,20 @@ class TaskUI {
     async handleExport() {
         const markdown = this.taskManager.exportToMarkdown();
 
-        // GitHub Gistにアップロード
-        const gistData = {
-            description: 'タスクリスト - ' + new Date().toLocaleString('ja-JP'),
-            public: true,
-            files: {
-                'tasks.md': {
-                    content: markdown
-                }
-            }
-        };
-
         try {
-            const response = await fetch('https://api.github.com/gists', {
+            // ローカルサーバー経由でgh CLIを使ってGistアップロード
+            const response = await fetch('http://localhost:3000/api/upload-gist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(gistData)
+                body: JSON.stringify({ markdown })
             });
 
-            if (response.ok) {
-                const result = await response.json();
-                const gistUrl = result.html_url;
+            const result = await response.json();
+
+            if (result.success) {
+                const gistUrl = result.url;
 
                 // 成功メッセージとURLをコピー
                 if (navigator.clipboard) {
@@ -246,10 +237,10 @@ class TaskUI {
                     prompt('✅ GitHubにアップロード成功！\nURLをコピーしてください:', gistUrl);
                 }
             } else {
-                throw new Error('アップロード失敗: ' + response.status);
+                throw new Error(result.error || 'アップロード失敗');
             }
         } catch (error) {
-            alert('❌ アップロードエラー: ' + error.message);
+            alert(`❌ アップロードエラー: ${error.message}\n\nサーバーが起動していることを確認してください。\n(node server.cjs)`);
             console.error(error);
         }
     }
