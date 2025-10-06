@@ -105,6 +105,14 @@ class TaskManager {
         }
     }
 
+    updateTaskText(id, text) {
+        const task = this.findTaskById(id);
+        if (task) {
+            task.text = text;
+            this.saveToLocalStorage();
+        }
+    }
+
     expandAll(tasks = this.tasks) {
         tasks.forEach(task => {
             task.expanded = true;
@@ -148,6 +156,7 @@ class TaskUI {
         this.expandAllBtn = document.getElementById('expandAll');
         this.collapseAllBtn = document.getElementById('collapseAll');
         this.priorityFilter = document.getElementById('priorityFilter');
+        this.clearFilterBtn = document.getElementById('clearFilter');
         this.activeSubtaskForm = null;
         this.currentFilter = '';
 
@@ -164,6 +173,11 @@ class TaskUI {
         this.collapseAllBtn.addEventListener('click', () => this.handleCollapseAll());
         this.priorityFilter.addEventListener('change', (e) => {
             this.currentFilter = e.target.value;
+            this.applyFilter();
+        });
+        this.clearFilterBtn.addEventListener('click', () => {
+            this.priorityFilter.value = '';
+            this.currentFilter = '';
             this.applyFilter();
         });
     }
@@ -266,23 +280,34 @@ class TaskUI {
                 </div>
             ` : ''}
             <div class="edit-form" data-task-id="${task.id}" style="display: none;">
-                <select class="edit-priority1">
-                    <option value="">未設定</option>
-                    <option value="S" ${task.priority1 === 'S' ? 'selected' : ''}>S</option>
-                    <option value="A" ${task.priority1 === 'A' ? 'selected' : ''}>A</option>
-                    <option value="B" ${task.priority1 === 'B' ? 'selected' : ''}>B</option>
-                    <option value="C" ${task.priority1 === 'C' ? 'selected' : ''}>C</option>
-                </select>
-                <select class="edit-priority2">
-                    <option value="">未設定</option>
-                    <option value="S" ${task.priority2 === 'S' ? 'selected' : ''}>S</option>
-                    <option value="A" ${task.priority2 === 'A' ? 'selected' : ''}>A</option>
-                    <option value="B" ${task.priority2 === 'B' ? 'selected' : ''}>B</option>
-                    <option value="C" ${task.priority2 === 'C' ? 'selected' : ''}>C</option>
-                </select>
-                <input type="date" class="edit-deadline" value="${task.deadline || ''}">
-                <button class="btn-confirm-edit">保存</button>
-                <button class="btn-cancel-edit">キャンセル</button>
+                <div class="edit-form-row">
+                    <label>タスク名:</label>
+                    <input type="text" class="edit-text" value="${this.escapeHtml(task.text)}">
+                </div>
+                <div class="edit-form-row">
+                    <label>重要度1:</label>
+                    <select class="edit-priority1">
+                        <option value="">未設定</option>
+                        <option value="S" ${task.priority1 === 'S' ? 'selected' : ''}>S</option>
+                        <option value="A" ${task.priority1 === 'A' ? 'selected' : ''}>A</option>
+                        <option value="B" ${task.priority1 === 'B' ? 'selected' : ''}>B</option>
+                        <option value="C" ${task.priority1 === 'C' ? 'selected' : ''}>C</option>
+                    </select>
+                    <label>重要度2:</label>
+                    <select class="edit-priority2">
+                        <option value="">未設定</option>
+                        <option value="S" ${task.priority2 === 'S' ? 'selected' : ''}>S</option>
+                        <option value="A" ${task.priority2 === 'A' ? 'selected' : ''}>A</option>
+                        <option value="B" ${task.priority2 === 'B' ? 'selected' : ''}>B</option>
+                        <option value="C" ${task.priority2 === 'C' ? 'selected' : ''}>C</option>
+                    </select>
+                    <label>期限:</label>
+                    <input type="date" class="edit-deadline" value="${task.deadline || ''}">
+                </div>
+                <div class="edit-form-actions">
+                    <button class="btn-confirm-edit">保存</button>
+                    <button class="btn-cancel-edit">キャンセル</button>
+                </div>
             </div>
         `;
 
@@ -325,6 +350,7 @@ class TaskUI {
 
         // 編集フォーム
         const editForm = taskDiv.querySelector('.edit-form');
+        const editText = editForm.querySelector('.edit-text');
         const editPriority1 = editForm.querySelector('.edit-priority1');
         const editPriority2 = editForm.querySelector('.edit-priority2');
         const editDeadline = editForm.querySelector('.edit-deadline');
@@ -332,10 +358,16 @@ class TaskUI {
         const cancelEditBtn = editForm.querySelector('.btn-cancel-edit');
 
         confirmEditBtn.addEventListener('click', () => {
-            this.taskManager.updateTaskPriority(task.id, editPriority1.value || null, editPriority2.value || null);
-            this.taskManager.updateTaskDeadline(task.id, editDeadline.value || null);
-            editForm.style.display = 'none';
-            this.render();
+            const newText = editText.value.trim();
+            if (newText) {
+                this.taskManager.updateTaskText(task.id, newText);
+                this.taskManager.updateTaskPriority(task.id, editPriority1.value || null, editPriority2.value || null);
+                this.taskManager.updateTaskDeadline(task.id, editDeadline.value || null);
+                editForm.style.display = 'none';
+                this.render();
+            } else {
+                alert('タスク名は空にできません');
+            }
         });
 
         cancelEditBtn.addEventListener('click', () => {
