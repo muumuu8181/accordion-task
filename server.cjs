@@ -54,11 +54,11 @@ const server = http.createServer((req, res) => {
                     res.end(JSON.stringify({ success: true, url: gistUrl, gistId: gistId, updated: true }));
 
                 } else {
-                    // 新規Gist作成
+                    // 新規Gist作成（デフォルトでsecret）
                     const tmpFile = path.join(__dirname, 'tasks.md');
                     fs.writeFileSync(tmpFile, markdown, 'utf8');
 
-                    const result = execSync(`gh gist create "${tmpFile}" --secret --desc "タスクリスト"`, {
+                    const result = execSync(`gh gist create "${tmpFile}" --desc "タスクリスト"`, {
                         encoding: 'utf8'
                     });
 
