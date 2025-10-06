@@ -82,6 +82,8 @@ hierarchical-task-manager/
 - v0.3: フィルター機能・デフォルト未設定対応
 - v0.4: フィルタークリア・編集機能強化
 - v0.4.1: 階層フィルターバグ修正
-- v0.5: Seleniumテスト追加
-- v0.5.1: GitHub API方式（失敗）
-- v0.6: gh CLI経由のGistアップロード実装
+- v0.05: Seleniumテスト追加
+- v0.06: GitHub API方式（失敗）
+- v0.07: gh CLI経由のGistアップロード実装
+- v0.15: バージョン表示追加
+- v0.16: サーバー起動スクリプト追加

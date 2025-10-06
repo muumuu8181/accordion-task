@@ -214,7 +214,18 @@ class TaskUI {
     async handleExport() {
         const markdown = this.taskManager.exportToMarkdown();
 
+        // 現在のURLを確認
+        const currentUrl = window.location.href;
+        console.log('現在のURL:', currentUrl);
+
+        // file://プロトコルの場合は警告
+        if (currentUrl.startsWith('file://')) {
+            alert('❌ エラー: index.htmlを直接開いています。\n\nstart.batを実行するか、\nnode server.cjs でサーバーを起動して\nhttp://localhost:3000 にアクセスしてください。');
+            return;
+        }
+
         try {
+            console.log('Gistアップロード開始...');
             // ローカルサーバー経由でgh CLIを使ってGistアップロード
             const response = await fetch('http://localhost:3000/api/upload-gist', {
                 method: 'POST',
@@ -224,7 +235,9 @@ class TaskUI {
                 body: JSON.stringify({ markdown })
             });
 
+            console.log('レスポンス受信:', response.status);
             const result = await response.json();
+            console.log('結果:', result);
 
             if (result.success) {
                 const gistUrl = result.url;
@@ -240,8 +253,8 @@ class TaskUI {
                 throw new Error(result.error || 'アップロード失敗');
             }
         } catch (error) {
+            console.error('エラー詳細:', error);
             alert(`❌ アップロードエラー: ${error.message}\n\nサーバーが起動していることを確認してください。\n(node server.cjs)`);
-            console.error(error);
         }
     }
 
