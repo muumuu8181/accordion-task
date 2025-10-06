@@ -174,6 +174,32 @@ class TaskManager {
             this.tasks = parsed.tasks || [];
             this.taskIdCounter = parsed.taskIdCounter || 1;
             this.displayIdCounter = parsed.displayIdCounter || 1;
+
+            // 既存タスクにIDがない場合、自動的に割り当てる（マイグレーション）
+            this.migrateTaskIds();
+        }
+    }
+
+    migrateTaskIds() {
+        let needsSave = false;
+
+        const assignIds = (tasks) => {
+            tasks.forEach(task => {
+                if (!task.taskId) {
+                    task.taskId = String(this.displayIdCounter++).padStart(6, '0');
+                    needsSave = true;
+                }
+                if (task.children && task.children.length > 0) {
+                    assignIds(task.children);
+                }
+            });
+        };
+
+        assignIds(this.tasks);
+
+        if (needsSave) {
+            this.saveToLocalStorage();
+            console.log('既存タスクにIDを自動割り当てしました');
         }
     }
 }
