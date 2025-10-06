@@ -6,7 +6,7 @@ class TaskManager {
         this.loadFromLocalStorage();
     }
 
-    addTask(text, parentId = null, level = 1) {
+    addTask(text, parentId = null, level = 1, priority1 = 'C', priority2 = 'C', deadline = null) {
         const task = {
             id: this.taskIdCounter++,
             text: text,
@@ -14,7 +14,10 @@ class TaskManager {
             level: level,
             parentId: parentId,
             children: [],
-            expanded: true
+            expanded: true,
+            priority1: priority1,
+            priority2: priority2,
+            deadline: deadline
         };
 
         if (parentId === null) {
@@ -85,6 +88,23 @@ class TaskManager {
         }
     }
 
+    updateTaskPriority(id, priority1, priority2) {
+        const task = this.findTaskById(id);
+        if (task) {
+            task.priority1 = priority1;
+            task.priority2 = priority2;
+            this.saveToLocalStorage();
+        }
+    }
+
+    updateTaskDeadline(id, deadline) {
+        const task = this.findTaskById(id);
+        if (task) {
+            task.deadline = deadline;
+            this.saveToLocalStorage();
+        }
+    }
+
     expandAll(tasks = this.tasks) {
         tasks.forEach(task => {
             task.expanded = true;
@@ -144,9 +164,16 @@ class TaskUI {
 
     handleAddTask() {
         const text = this.newTaskInput.value.trim();
+        const priority1 = document.getElementById('newTaskPriority1').value;
+        const priority2 = document.getElementById('newTaskPriority2').value;
+        const deadline = document.getElementById('newTaskDeadline').value || null;
+
         if (text) {
-            this.taskManager.addTask(text);
+            this.taskManager.addTask(text, null, 1, priority1, priority2, deadline);
             this.newTaskInput.value = '';
+            document.getElementById('newTaskPriority1').value = 'C';
+            document.getElementById('newTaskPriority2').value = 'C';
+            document.getElementById('newTaskDeadline').value = '';
             this.render();
         }
     }
@@ -186,9 +213,11 @@ class TaskUI {
 
         const hasChildren = task.children.length > 0;
         const canAddChildren = task.level < 4;
+        const priorityClass = `priority-${task.priority1}${task.priority2}`;
+        const deadlineText = task.deadline ? `期限: ${task.deadline}` : '';
 
         taskDiv.innerHTML = `
-            <div class="task-header">
+            <div class="task-header ${priorityClass}">
                 ${hasChildren ? `
                     <button class="toggle-btn ${task.expanded ? '' : 'collapsed'}">
                         ▼
@@ -196,7 +225,12 @@ class TaskUI {
                 ` : '<span style="width: 24px; margin-right: 10px;"></span>'}
                 <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
                 <span class="task-text ${task.completed ? 'completed' : ''}">${this.escapeHtml(task.text)}</span>
+                <div class="task-meta">
+                    <span class="priority-badge">${task.priority1}${task.priority2}</span>
+                    ${deadlineText ? `<span class="deadline-badge">${deadlineText}</span>` : ''}
+                </div>
                 <div class="task-actions">
+                    <button class="btn-action btn-edit">編集</button>
                     ${canAddChildren ? '<button class="btn-action btn-add">+ 細分化</button>' : ''}
                     <button class="btn-action btn-delete">削除</button>
                 </div>
@@ -205,16 +239,47 @@ class TaskUI {
             ${canAddChildren ? `
                 <div class="add-subtask-form" data-parent-id="${task.id}">
                     <input type="text" placeholder="サブタスクを入力..." class="subtask-input">
+                    <select class="subtask-priority1">
+                        <option value="S">S</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C" selected>C</option>
+                    </select>
+                    <select class="subtask-priority2">
+                        <option value="S">S</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C" selected>C</option>
+                    </select>
+                    <input type="date" class="subtask-deadline">
                     <button class="btn-confirm">追加</button>
                     <button class="btn-cancel">キャンセル</button>
                 </div>
             ` : ''}
+            <div class="edit-form" data-task-id="${task.id}" style="display: none;">
+                <select class="edit-priority1">
+                    <option value="S" ${task.priority1 === 'S' ? 'selected' : ''}>S</option>
+                    <option value="A" ${task.priority1 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="B" ${task.priority1 === 'B' ? 'selected' : ''}>B</option>
+                    <option value="C" ${task.priority1 === 'C' ? 'selected' : ''}>C</option>
+                </select>
+                <select class="edit-priority2">
+                    <option value="S" ${task.priority2 === 'S' ? 'selected' : ''}>S</option>
+                    <option value="A" ${task.priority2 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="B" ${task.priority2 === 'B' ? 'selected' : ''}>B</option>
+                    <option value="C" ${task.priority2 === 'C' ? 'selected' : ''}>C</option>
+                </select>
+                <input type="date" class="edit-deadline" value="${task.deadline || ''}">
+                <button class="btn-confirm-edit">保存</button>
+                <button class="btn-cancel-edit">キャンセル</button>
+            </div>
         `;
 
         // イベントリスナー設定
         const header = taskDiv.querySelector('.task-header');
         const toggleBtn = taskDiv.querySelector('.toggle-btn');
         const checkbox = taskDiv.querySelector('.task-checkbox');
+        const editBtn = taskDiv.querySelector('.btn-edit');
         const addBtn = taskDiv.querySelector('.btn-add');
         const deleteBtn = taskDiv.querySelector('.btn-delete');
 
@@ -230,6 +295,11 @@ class TaskUI {
             this.handleCheckbox(task.id);
         });
 
+        editBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.showEditForm(task.id);
+        });
+
         if (addBtn) {
             addBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -242,15 +312,37 @@ class TaskUI {
             this.handleDelete(task.id);
         });
 
+        // 編集フォーム
+        const editForm = taskDiv.querySelector('.edit-form');
+        const editPriority1 = editForm.querySelector('.edit-priority1');
+        const editPriority2 = editForm.querySelector('.edit-priority2');
+        const editDeadline = editForm.querySelector('.edit-deadline');
+        const confirmEditBtn = editForm.querySelector('.btn-confirm-edit');
+        const cancelEditBtn = editForm.querySelector('.btn-cancel-edit');
+
+        confirmEditBtn.addEventListener('click', () => {
+            this.taskManager.updateTaskPriority(task.id, editPriority1.value, editPriority2.value);
+            this.taskManager.updateTaskDeadline(task.id, editDeadline.value || null);
+            editForm.style.display = 'none';
+            this.render();
+        });
+
+        cancelEditBtn.addEventListener('click', () => {
+            editForm.style.display = 'none';
+        });
+
         // サブタスク追加フォーム
         const subtaskForm = taskDiv.querySelector('.add-subtask-form');
         if (subtaskForm) {
             const input = subtaskForm.querySelector('.subtask-input');
+            const priority1Select = subtaskForm.querySelector('.subtask-priority1');
+            const priority2Select = subtaskForm.querySelector('.subtask-priority2');
+            const deadlineInput = subtaskForm.querySelector('.subtask-deadline');
             const confirmBtn = subtaskForm.querySelector('.btn-confirm');
             const cancelBtn = subtaskForm.querySelector('.btn-cancel');
 
             confirmBtn.addEventListener('click', () => {
-                this.handleAddSubtask(task.id, input.value);
+                this.handleAddSubtask(task.id, input.value, priority1Select.value, priority2Select.value, deadlineInput.value);
             });
 
             cancelBtn.addEventListener('click', () => {
@@ -259,7 +351,7 @@ class TaskUI {
 
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    this.handleAddSubtask(task.id, input.value);
+                    this.handleAddSubtask(task.id, input.value, priority1Select.value, priority2Select.value, deadlineInput.value);
                 } else if (e.key === 'Escape') {
                     this.hideSubtaskForm();
                 }
@@ -312,12 +404,20 @@ class TaskUI {
         }
     }
 
-    handleAddSubtask(parentId, text) {
+    handleAddSubtask(parentId, text, priority1 = 'C', priority2 = 'C', deadline = null) {
         text = text.trim();
         if (text) {
-            this.taskManager.addTask(text, parentId);
+            const parent = this.taskManager.findTaskById(parentId);
+            this.taskManager.addTask(text, parentId, parent.level + 1, priority1, priority2, deadline || null);
             this.hideSubtaskForm();
             this.render();
+        }
+    }
+
+    showEditForm(taskId) {
+        const editForm = document.querySelector(`.edit-form[data-task-id="${taskId}"]`);
+        if (editForm) {
+            editForm.style.display = 'flex';
         }
     }
 

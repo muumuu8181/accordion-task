@@ -59,8 +59,36 @@ h1 {
 
 .add-task-section {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 30px;
+    align-items: center;
+}
+
+.priority-selectors {
+    display: flex;
+    gap: 10px;
+}
+
+.priority-selectors label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.priority-selectors select, #newTaskDeadline {
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.priority-selectors select:focus, #newTaskDeadline:focus {
+    outline: none;
+    border-color: #667eea;
 }
 
 #newTaskInput {
@@ -137,11 +165,54 @@ h1 {
     cursor: pointer;
     user-select: none;
     transition: background-color 0.2s ease;
+    gap: 10px;
 }
 
 .task-header:hover {
     background: rgba(0, 0, 0, 0.05);
 }
+
+.task-meta {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.priority-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.deadline-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+/* 重要度による色分け */
+.priority-SS .priority-badge { background: #dc2626; }
+.priority-SA .priority-badge { background: #ea580c; }
+.priority-SB .priority-badge { background: #f59e0b; }
+.priority-SC .priority-badge { background: #fbbf24; }
+.priority-AS .priority-badge { background: #ea580c; }
+.priority-AA .priority-badge { background: #f59e0b; }
+.priority-AB .priority-badge { background: #fbbf24; }
+.priority-AC .priority-badge { background: #facc15; }
+.priority-BS .priority-badge { background: #f59e0b; }
+.priority-BA .priority-badge { background: #fbbf24; }
+.priority-BB .priority-badge { background: #facc15; }
+.priority-BC .priority-badge { background: #fde047; }
+.priority-CS .priority-badge { background: #fbbf24; }
+.priority-CA .priority-badge { background: #facc15; }
+.priority-CB .priority-badge { background: #fde047; }
+.priority-CC .priority-badge { background: #fef08a; color: #78716c; }
 
 .toggle-btn {
     width: 24px;
@@ -241,19 +312,29 @@ h1 {
 .add-subtask-form.active {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-.add-subtask-form input {
+.add-subtask-form .subtask-input {
     flex: 1;
+    min-width: 200px;
     padding: 8px 12px;
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     font-size: 14px;
 }
 
-.add-subtask-form input:focus {
+.add-subtask-form .subtask-input:focus {
     outline: none;
     border-color: #667eea;
+}
+
+.add-subtask-form select, .add-subtask-form input[type="date"] {
+    padding: 6px 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 13px;
 }
 
 .add-subtask-form button {
@@ -273,6 +354,46 @@ h1 {
 .add-subtask-form .btn-cancel {
     background: #cbd5e0;
     color: #333;
+}
+
+.edit-form {
+    display: none;
+    padding: 10px 15px 10px 45px;
+    background: rgba(0, 0, 0, 0.03);
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.edit-form select, .edit-form input[type="date"] {
+    padding: 6px 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.edit-form button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.edit-form .btn-confirm-edit {
+    background: #3b82f6;
+    color: white;
+}
+
+.edit-form .btn-cancel-edit {
+    background: #e5e7eb;
+    color: #333;
+}
+
+.btn-edit {
+    background: #3b82f6 !important;
+    color: white;
 }
 
 /* スクロールバーのスタイル */
