@@ -43,10 +43,25 @@ const server = http.createServer((req, res) => {
 
                 if (gistId) {
                     // 既存のGistを更新
-                    const escapedMarkdown = markdown.replace(/"/g, '\\"').replace(/\n/g, '\\n');
-                    const updateCommand = `gh api gists/${gistId} -X PATCH -f "files[tasks.md][content]=${escapedMarkdown}"`;
+                    const tmpFile = path.join(__dirname, 'tasks.md');
+                    fs.writeFileSync(tmpFile, markdown, 'utf8');
 
-                    execSync(updateCommand, { encoding: 'utf8' });
+                    // gh api で直接JSONを送る
+                    const payload = {
+                        files: {
+                            'tasks.md': {
+                                content: markdown
+                            }
+                        }
+                    };
+
+                    const payloadFile = path.join(__dirname, 'gist-payload.json');
+                    fs.writeFileSync(payloadFile, JSON.stringify(payload), 'utf8');
+
+                    execSync(`gh api gists/${gistId} -X PATCH --input "${payloadFile}"`, { encoding: 'utf8' });
+
+                    fs.unlinkSync(tmpFile);
+                    fs.unlinkSync(payloadFile);
 
                     const gistUrl = `https://gist.github.com/${gistId}`;
 
