@@ -39,24 +39,39 @@ const server = http.createServer((req, res) => {
 
         req.on('end', () => {
             try {
-                const { markdown } = JSON.parse(body);
+                const { markdown, gistId } = JSON.parse(body);
 
-                // 一時ファイルに保存
-                const tmpFile = path.join(__dirname, 'tasks-tmp.md');
-                fs.writeFileSync(tmpFile, markdown, 'utf8');
+                if (gistId) {
+                    // 既存のGistを更新
+                    const escapedMarkdown = markdown.replace(/"/g, '\\"').replace(/\n/g, '\\n');
+                    const updateCommand = `gh api gists/${gistId} -X PATCH -f "files[tasks.md][content]=${escapedMarkdown}"`;
 
-                // gh gist createでアップロード（private）
-                const result = execSync(`gh gist create "${tmpFile}" --secret --desc "タスクリスト - ${new Date().toLocaleString('ja-JP')}"`, {
-                    encoding: 'utf8'
-                });
+                    execSync(updateCommand, { encoding: 'utf8' });
 
-                // 一時ファイル削除
-                fs.unlinkSync(tmpFile);
+                    const gistUrl = `https://gist.github.com/${gistId}`;
 
-                const gistUrl = result.trim();
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, url: gistUrl, gistId: gistId, updated: true }));
 
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, url: gistUrl }));
+                } else {
+                    // 新規Gist作成
+                    const tmpFile = path.join(__dirname, 'tasks.md');
+                    fs.writeFileSync(tmpFile, markdown, 'utf8');
+
+                    const result = execSync(`gh gist create "${tmpFile}" --secret --desc "タスクリスト"`, {
+                        encoding: 'utf8'
+                    });
+
+                    fs.unlinkSync(tmpFile);
+
+                    const gistUrl = result.trim();
+                    // URLからGist IDを抽出: https://gist.github.com/username/GIST_ID
+                    const gistIdMatch = gistUrl.match(/\/([a-f0-9]+)$/);
+                    const newGistId = gistIdMatch ? gistIdMatch[1] : null;
+
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, url: gistUrl, gistId: newGistId, updated: false }));
+                }
 
             } catch (error) {
                 res.writeHead(500, { 'Content-Type': 'application/json' });

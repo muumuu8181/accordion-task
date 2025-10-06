@@ -225,14 +225,18 @@ class TaskUI {
         }
 
         try {
+            // LocalStorageから既存のGist IDを取得
+            const savedGistId = localStorage.getItem('gistId');
+            console.log('保存されたGist ID:', savedGistId);
+
             console.log('Gistアップロード開始...');
-            // ローカルサーバー経由でgh CLIを使ってGistアップロード
+            // ローカルサーバー経由でgh CLIを使ってGistアップロード/更新
             const response = await fetch('http://localhost:3000/api/upload-gist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ markdown })
+                body: JSON.stringify({ markdown, gistId: savedGistId })
             });
 
             console.log('レスポンス受信:', response.status);
@@ -242,12 +246,19 @@ class TaskUI {
             if (result.success) {
                 const gistUrl = result.url;
 
+                // Gist IDを保存
+                if (result.gistId) {
+                    localStorage.setItem('gistId', result.gistId);
+                    console.log('Gist ID保存:', result.gistId);
+                }
+
                 // 成功メッセージとURLをコピー
+                const action = result.updated ? '更新' : '作成';
                 if (navigator.clipboard) {
                     await navigator.clipboard.writeText(gistUrl);
-                    alert(`✅ GitHubにアップロード成功！\n\nURL: ${gistUrl}\n\n（クリップボードにコピーしました）`);
+                    alert(`✅ GitHub Gist${action}成功！\n\nURL: ${gistUrl}\n\n（クリップボードにコピーしました）`);
                 } else {
-                    prompt('✅ GitHubにアップロード成功！\nURLをコピーしてください:', gistUrl);
+                    prompt(`✅ GitHub Gist${action}成功！\nURLをコピーしてください:`, gistUrl);
                 }
             } else {
                 throw new Error(result.error || 'アップロード失敗');
