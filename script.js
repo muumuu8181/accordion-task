@@ -129,6 +129,33 @@ class TaskManager {
         this.saveToLocalStorage();
     }
 
+    exportToMarkdown() {
+        let markdown = '# タスクリスト\n\n';
+
+        const formatTask = (task, indent = '') => {
+            const checkbox = task.completed ? '[x]' : '[ ]';
+            const priority = (task.priority1 && task.priority2) ? `**[${task.priority1}${task.priority2}]**` : '';
+            const deadline = task.deadline ? `📅 ${task.deadline}` : '';
+            const meta = [priority, deadline].filter(x => x).join(' ');
+
+            let line = `${indent}- ${checkbox} ${task.text}`;
+            if (meta) {
+                line += ` ${meta}`;
+            }
+            line += '\n';
+
+            markdown += line;
+
+            task.children.forEach(child => {
+                formatTask(child, indent + '  ');
+            });
+        };
+
+        this.tasks.forEach(task => formatTask(task));
+
+        return markdown;
+    }
+
     saveToLocalStorage() {
         localStorage.setItem('hierarchicalTasks', JSON.stringify({
             tasks: this.tasks,
@@ -157,6 +184,7 @@ class TaskUI {
         this.collapseAllBtn = document.getElementById('collapseAll');
         this.priorityFilter = document.getElementById('priorityFilter');
         this.clearFilterBtn = document.getElementById('clearFilter');
+        this.exportBtn = document.getElementById('exportToGitHub');
         this.activeSubtaskForm = null;
         this.currentFilter = '';
 
@@ -180,6 +208,18 @@ class TaskUI {
             this.currentFilter = '';
             this.applyFilter();
         });
+        this.exportBtn.addEventListener('click', () => this.handleExport());
+    }
+
+    handleExport() {
+        const markdown = this.taskManager.exportToMarkdown();
+        const blob = new Blob([markdown], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tasks.md';
+        a.click();
+        URL.revokeObjectURL(url);
     }
 
     handleAddTask() {
