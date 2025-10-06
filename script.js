@@ -3,12 +3,14 @@ class TaskManager {
     constructor() {
         this.tasks = [];
         this.taskIdCounter = 1;
+        this.displayIdCounter = 1; // 通し番号用カウンター
         this.loadFromLocalStorage();
     }
 
     addTask(text, parentId = null, level = 1, priority1 = null, priority2 = null, deadline = null) {
         const task = {
             id: this.taskIdCounter++,
+            taskId: String(this.displayIdCounter++).padStart(6, '0'), // 6桁の通し番号
             text: text,
             completed: false,
             level: level,
@@ -134,11 +136,12 @@ class TaskManager {
 
         const formatTask = (task, indent = '') => {
             const checkbox = task.completed ? '[x]' : '[ ]';
+            const taskId = task.taskId ? `\`#${task.taskId}\`` : '';
             const priority = (task.priority1 && task.priority2) ? `**[${task.priority1}${task.priority2}]**` : '';
             const deadline = task.deadline ? `📅 ${task.deadline}` : '';
             const meta = [priority, deadline].filter(x => x).join(' ');
 
-            let line = `${indent}- ${checkbox} ${task.text}`;
+            let line = `${indent}- ${checkbox} ${taskId} ${task.text}`;
             if (meta) {
                 line += ` ${meta}`;
             }
@@ -159,7 +162,8 @@ class TaskManager {
     saveToLocalStorage() {
         localStorage.setItem('hierarchicalTasks', JSON.stringify({
             tasks: this.tasks,
-            taskIdCounter: this.taskIdCounter
+            taskIdCounter: this.taskIdCounter,
+            displayIdCounter: this.displayIdCounter
         }));
     }
 
@@ -169,6 +173,7 @@ class TaskManager {
             const parsed = JSON.parse(data);
             this.tasks = parsed.tasks || [];
             this.taskIdCounter = parsed.taskIdCounter || 1;
+            this.displayIdCounter = parsed.displayIdCounter || 1;
         }
     }
 }
@@ -332,6 +337,7 @@ class TaskUI {
                     </button>
                 ` : '<span style="width: 24px; margin-right: 10px;"></span>'}
                 <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+                <span class="task-id">#${task.taskId || '------'}</span>
                 <span class="task-text ${task.completed ? 'completed' : ''}">${this.escapeHtml(task.text)}</span>
                 <div class="task-meta">
                     ${hasPriority ? `<span class="priority-badge">${task.priority1}${task.priority2}</span>` : '<span class="priority-badge priority-none">未設定</span>'}
