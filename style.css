@@ -22,11 +22,18 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 15px;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 3px solid #667eea;
+}
+
+header > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 h1 {
@@ -36,7 +43,40 @@ h1 {
 
 .controls {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+}
+
+.filter-section label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+#priorityFilter {
+    padding: 8px 12px;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#priorityFilter:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
 
 .btn-control {
@@ -213,6 +253,11 @@ h1 {
 .priority-CA .priority-badge { background: #facc15; }
 .priority-CB .priority-badge { background: #fde047; }
 .priority-CC .priority-badge { background: #fef08a; color: #78716c; }
+
+.priority-none {
+    background: #e5e7eb !important;
+    color: #6b7280 !important;
+}
 
 .toggle-btn {
     width: 24px;

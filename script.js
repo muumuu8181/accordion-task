@@ -6,7 +6,7 @@ class TaskManager {
         this.loadFromLocalStorage();
     }
 
-    addTask(text, parentId = null, level = 1, priority1 = 'C', priority2 = 'C', deadline = null) {
+    addTask(text, parentId = null, level = 1, priority1 = null, priority2 = null, deadline = null) {
         const task = {
             id: this.taskIdCounter++,
             text: text,
@@ -147,7 +147,9 @@ class TaskUI {
         this.addTaskBtn = document.getElementById('addTaskBtn');
         this.expandAllBtn = document.getElementById('expandAll');
         this.collapseAllBtn = document.getElementById('collapseAll');
+        this.priorityFilter = document.getElementById('priorityFilter');
         this.activeSubtaskForm = null;
+        this.currentFilter = '';
 
         this.initEventListeners();
         this.render();
@@ -160,19 +162,23 @@ class TaskUI {
         });
         this.expandAllBtn.addEventListener('click', () => this.handleExpandAll());
         this.collapseAllBtn.addEventListener('click', () => this.handleCollapseAll());
+        this.priorityFilter.addEventListener('change', (e) => {
+            this.currentFilter = e.target.value;
+            this.applyFilter();
+        });
     }
 
     handleAddTask() {
         const text = this.newTaskInput.value.trim();
-        const priority1 = document.getElementById('newTaskPriority1').value;
-        const priority2 = document.getElementById('newTaskPriority2').value;
+        const priority1 = document.getElementById('newTaskPriority1').value || null;
+        const priority2 = document.getElementById('newTaskPriority2').value || null;
         const deadline = document.getElementById('newTaskDeadline').value || null;
 
         if (text) {
             this.taskManager.addTask(text, null, 1, priority1, priority2, deadline);
             this.newTaskInput.value = '';
-            document.getElementById('newTaskPriority1').value = 'C';
-            document.getElementById('newTaskPriority2').value = 'C';
+            document.getElementById('newTaskPriority1').value = '';
+            document.getElementById('newTaskPriority2').value = '';
             document.getElementById('newTaskDeadline').value = '';
             this.render();
         }
@@ -213,11 +219,12 @@ class TaskUI {
 
         const hasChildren = task.children.length > 0;
         const canAddChildren = task.level < 4;
-        const priorityClass = `priority-${task.priority1}${task.priority2}`;
+        const hasPriority = task.priority1 && task.priority2;
+        const priorityClass = hasPriority ? `priority-${task.priority1}${task.priority2}` : '';
         const deadlineText = task.deadline ? `期限: ${task.deadline}` : '';
 
         taskDiv.innerHTML = `
-            <div class="task-header ${priorityClass}">
+            <div class="task-header ${priorityClass}" data-priority1="${task.priority1 || ''}" data-priority2="${task.priority2 || ''}">
                 ${hasChildren ? `
                     <button class="toggle-btn ${task.expanded ? '' : 'collapsed'}">
                         ▼
@@ -226,7 +233,7 @@ class TaskUI {
                 <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
                 <span class="task-text ${task.completed ? 'completed' : ''}">${this.escapeHtml(task.text)}</span>
                 <div class="task-meta">
-                    <span class="priority-badge">${task.priority1}${task.priority2}</span>
+                    ${hasPriority ? `<span class="priority-badge">${task.priority1}${task.priority2}</span>` : '<span class="priority-badge priority-none">未設定</span>'}
                     ${deadlineText ? `<span class="deadline-badge">${deadlineText}</span>` : ''}
                 </div>
                 <div class="task-actions">
@@ -240,16 +247,18 @@ class TaskUI {
                 <div class="add-subtask-form" data-parent-id="${task.id}">
                     <input type="text" placeholder="サブタスクを入力..." class="subtask-input">
                     <select class="subtask-priority1">
+                        <option value="" selected>未設定</option>
                         <option value="S">S</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
-                        <option value="C" selected>C</option>
+                        <option value="C">C</option>
                     </select>
                     <select class="subtask-priority2">
+                        <option value="" selected>未設定</option>
                         <option value="S">S</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
-                        <option value="C" selected>C</option>
+                        <option value="C">C</option>
                     </select>
                     <input type="date" class="subtask-deadline">
                     <button class="btn-confirm">追加</button>
@@ -258,12 +267,14 @@ class TaskUI {
             ` : ''}
             <div class="edit-form" data-task-id="${task.id}" style="display: none;">
                 <select class="edit-priority1">
+                    <option value="">未設定</option>
                     <option value="S" ${task.priority1 === 'S' ? 'selected' : ''}>S</option>
                     <option value="A" ${task.priority1 === 'A' ? 'selected' : ''}>A</option>
                     <option value="B" ${task.priority1 === 'B' ? 'selected' : ''}>B</option>
                     <option value="C" ${task.priority1 === 'C' ? 'selected' : ''}>C</option>
                 </select>
                 <select class="edit-priority2">
+                    <option value="">未設定</option>
                     <option value="S" ${task.priority2 === 'S' ? 'selected' : ''}>S</option>
                     <option value="A" ${task.priority2 === 'A' ? 'selected' : ''}>A</option>
                     <option value="B" ${task.priority2 === 'B' ? 'selected' : ''}>B</option>
@@ -321,7 +332,7 @@ class TaskUI {
         const cancelEditBtn = editForm.querySelector('.btn-cancel-edit');
 
         confirmEditBtn.addEventListener('click', () => {
-            this.taskManager.updateTaskPriority(task.id, editPriority1.value, editPriority2.value);
+            this.taskManager.updateTaskPriority(task.id, editPriority1.value || null, editPriority2.value || null);
             this.taskManager.updateTaskDeadline(task.id, editDeadline.value || null);
             editForm.style.display = 'none';
             this.render();
@@ -404,11 +415,11 @@ class TaskUI {
         }
     }
 
-    handleAddSubtask(parentId, text, priority1 = 'C', priority2 = 'C', deadline = null) {
+    handleAddSubtask(parentId, text, priority1 = null, priority2 = null, deadline = null) {
         text = text.trim();
         if (text) {
             const parent = this.taskManager.findTaskById(parentId);
-            this.taskManager.addTask(text, parentId, parent.level + 1, priority1, priority2, deadline || null);
+            this.taskManager.addTask(text, parentId, parent.level + 1, priority1 || null, priority2 || null, deadline || null);
             this.hideSubtaskForm();
             this.render();
         }
@@ -425,6 +436,32 @@ class TaskUI {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    applyFilter() {
+        const allTaskItems = document.querySelectorAll('.task-item');
+
+        allTaskItems.forEach(item => {
+            const header = item.querySelector('.task-header');
+            const priority1 = header.dataset.priority1;
+            const priority2 = header.dataset.priority2;
+
+            let shouldShow = true;
+
+            if (this.currentFilter === 'unset') {
+                // 未設定のみ
+                shouldShow = !priority1 || !priority2;
+            } else if (this.currentFilter) {
+                // S, A, B, C のいずれか
+                shouldShow = priority1 === this.currentFilter;
+            }
+
+            if (shouldShow) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
     }
 }
 

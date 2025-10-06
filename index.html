@@ -9,8 +9,22 @@
 <body>
     <div class="container">
         <header>
-            <h1>📋 階層的タスク管理</h1>
+            <div>
+                <h1>📋 階層的タスク管理</h1>
+            </div>
             <div class="controls">
+                <div class="filter-section">
+                    <label>フィルター:
+                        <select id="priorityFilter">
+                            <option value="">すべて</option>
+                            <option value="S">S (SS, SA, SB, SC)</option>
+                            <option value="A">A (AS, AA, AB, AC)</option>
+                            <option value="B">B (BS, BA, BB, BC)</option>
+                            <option value="C">C (CS, CA, CB, CC)</option>
+                            <option value="unset">未設定のみ</option>
+                        </select>
+                    </label>
+                </div>
                 <button id="expandAll" class="btn-control">すべて展開</button>
                 <button id="collapseAll" class="btn-control">すべて閉じる</button>
             </div>
@@ -21,18 +35,20 @@
             <div class="priority-selectors">
                 <label>重要度1:
                     <select id="newTaskPriority1">
+                        <option value="" selected>未設定</option>
                         <option value="S">S</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
-                        <option value="C" selected>C</option>
+                        <option value="C">C</option>
                     </select>
                 </label>
                 <label>重要度2:
                     <select id="newTaskPriority2">
+                        <option value="" selected>未設定</option>
                         <option value="S">S</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
-                        <option value="C" selected>C</option>
+                        <option value="C">C</option>
                     </select>
                 </label>
             </div>
