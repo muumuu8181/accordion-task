@@ -6,7 +6,7 @@
   accordion-task（階層的タスク管理アプリ）
 
 ■ 最重要：まず最初に読むべきドキュメント
-  パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+  パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
 
   ↑このファイルに全ての情報が記載されています。
     必ず最初にこのファイルを開いて、全体像を把握してください。
@@ -17,7 +17,7 @@
 ■ 主要ドキュメント（優先度順）
 
   1. 引き継ぎドキュメント（必読）
-     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
      → 全ファイルのフルパス、起動方法、使い方、トラブルシューティング等
 
   2. プロジェクト説明書（詳細な使い方）
@@ -90,8 +90,8 @@
       コマンド: gh auth login
 
   Q4: どこから手を付ければいい？
-  A4: まず HANDOVER_20251008.md を読んでください。
-      パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+  A4: まず HANDOVER.md を読んでください。
+      パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
 
 ■ 緊急連絡先・サポート
 
@@ -106,7 +106,7 @@
 
   hierarchical-task-manager/
   ├── handover/                 ← 引き継ぎドキュメント（ここ！）
-  │   ├── HANDOVER_20251008.md  ← 詳細な引き継ぎ情報
+  │   ├── HANDOVER.md           ← 詳細な引き継ぎ情報
   │   └── 第三者への引き継ぎ指示.txt ← このファイル
   ├── index.html                ← メインHTML
   ├── style.css                 ← スタイル
@@ -121,8 +121,8 @@
 
 ■ 次のアクション
 
-  ☐ HANDOVER_20251008.md を開いて読む
-     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+  ☐ HANDOVER.md を開いて読む
+     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
 
   ☐ Node.jsがインストールされているか確認
      コマンド: node --version
@@ -140,5 +140,5 @@
 ==============================================================================
 作成日: 2025年10月8日
 バージョン: v0.22
-最終更新コミット: adfeaab
+最終更新コミット: 62977b3
 ==============================================================================

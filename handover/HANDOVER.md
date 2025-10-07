@@ -36,7 +36,7 @@ C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
 | **Gitフォルダ** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\.git` |
 | **リモートリポジトリ** | `https://github.com/muumuu8181/accordion-task.git` |
 | **ブランチ** | `master` |
-| **最新コミット** | `388c8cc - docs: Complete v0.22 documentation and project setup` |
+| **最新コミット** | `62977b3 - docs: Add quick handover guide for new members` |
 
 ## 🔗 外部リンク
 
@@ -541,4 +541,15 @@ git push origin v0.23
 **最終更新**: 2025年10月7日
 **作成者**: Claude (AI)
 **バージョン**: v0.22
-**ドキュメントパス**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\HANDOVER.md`
+**ドキュメントパス**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md`
+
+## 📌 CLAUDE.mdについて
+
+このプロジェクトのルートディレクトリ (`C:\Users\user\CLAUDE.md`) にAI作業用の設定ファイルがありますが、**第三者（人間の開発者）は読む必要ありません**。
+
+- **用途**: AI（Claude等）が作業する際の内部ルール
+- **内容**: hooks設定、ファイル配置ルール、ツール使用ログ記録等
+- **対象**: AIのみ
+- **第三者**: 読まなくてOK（プロジェクト作業には不要）
+
+人間の開発者は、このHANDOVER.mdとREADME.mdを読めば十分です。
