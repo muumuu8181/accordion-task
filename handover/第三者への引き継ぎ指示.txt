@@ -1,0 +1,144 @@
+==============================================================================
+  階層的タスク管理アプリ - 第三者への引き継ぎ指示
+==============================================================================
+
+■ プロジェクト名
+  accordion-task（階層的タスク管理アプリ）
+
+■ 最重要：まず最初に読むべきドキュメント
+  パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+
+  ↑このファイルに全ての情報が記載されています。
+    必ず最初にこのファイルを開いて、全体像を把握してください。
+
+■ プロジェクトフォルダ
+  C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+
+■ 主要ドキュメント（優先度順）
+
+  1. 引き継ぎドキュメント（必読）
+     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+     → 全ファイルのフルパス、起動方法、使い方、トラブルシューティング等
+
+  2. プロジェクト説明書（詳細な使い方）
+     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\README.md
+     → 機能詳細、技術スタック、インストール方法、使用方法
+
+  3. AI協調作業指示書（AI利用時）
+     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\AI_PROMPT.md
+     → 複数AIでタスクを処理する場合の手順
+
+■ クイックスタート（3ステップ）
+
+  ステップ1: プロジェクトフォルダを開く
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+
+  ステップ2: サーバーを起動
+    方法A: start.bat をダブルクリック（Windows推奨）
+    方法B: コマンドプロンプトで "node server.cjs" を実行
+
+  ステップ3: ブラウザでアクセス
+    http://localhost:3000
+
+■ GitHub情報
+
+  リポジトリURL:
+    https://github.com/muumuu8181/accordion-task
+
+  タスクリストGist（AI協調作業用）:
+    https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+
+■ 主要ファイル一覧
+
+  【フロントエンド】
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\index.html
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\style.css
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js
+
+  【バックエンド】
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\server.cjs
+
+  【起動・テスト】
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\start.bat
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\test_selenium.py
+
+  【設定】
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\package.json
+    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\.gitignore
+
+■ 前提条件（必要なソフトウェア）
+
+  必須:
+    - Node.js (v14以降)
+    - GitHub CLI (gh) ※Gist連携を使う場合
+
+  任意:
+    - Python 3.x + Selenium ※テストを実行する場合
+
+■ よくある質問
+
+  Q1: アプリが起動しない
+  A1: Node.jsがインストールされているか確認してください。
+      コマンド: node --version
+
+  Q2: "FAILED TO FETCH" エラーが出る
+  A2: index.htmlを直接開いていませんか？
+      必ず node server.cjs でサーバーを起動してください。
+
+  Q3: GitHub Gistエクスポートが失敗する
+  A3: GitHub CLIの認証が必要です。
+      コマンド: gh auth login
+
+  Q4: どこから手を付ければいい？
+  A4: まず HANDOVER_20251008.md を読んでください。
+      パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+
+■ 緊急連絡先・サポート
+
+  GitHub Issues:
+    https://github.com/muumuu8181/accordion-task/issues
+
+  コミットログ確認:
+    cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+    git log --oneline
+
+■ プロジェクト構造（簡易版）
+
+  hierarchical-task-manager/
+  ├── handover/                 ← 引き継ぎドキュメント（ここ！）
+  │   ├── HANDOVER_20251008.md  ← 詳細な引き継ぎ情報
+  │   └── 第三者への引き継ぎ指示.txt ← このファイル
+  ├── index.html                ← メインHTML
+  ├── style.css                 ← スタイル
+  ├── script.js                 ← メインロジック
+  ├── server.cjs                ← サーバー
+  ├── start.bat                 ← 起動スクリプト
+  ├── test_selenium.py          ← テスト
+  ├── README.md                 ← 詳細ドキュメント
+  ├── AI_PROMPT.md              ← AI作業指示
+  ├── package.json              ← プロジェクト設定
+  └── .gitignore                ← Git除外設定
+
+■ 次のアクション
+
+  ☐ HANDOVER_20251008.md を開いて読む
+     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER_20251008.md
+
+  ☐ Node.jsがインストールされているか確認
+     コマンド: node --version
+
+  ☐ サーバーを起動してみる
+     方法: start.bat をダブルクリック
+
+  ☐ ブラウザでアクセスしてみる
+     URL: http://localhost:3000
+
+  ☐ タスクを追加・編集・削除してみる
+
+  ☐ GitHub Gistエクスポートを試す（gh auth login後）
+
+==============================================================================
+作成日: 2025年10月8日
+バージョン: v0.22
+最終更新コミット: adfeaab
+==============================================================================
