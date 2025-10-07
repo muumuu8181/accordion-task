@@ -1,0 +1,27 @@
+{
+  "name": "hierarchical-task-manager",
+  "version": "0.22.0",
+  "description": "4階層タスク管理アプリケーション - AI協調作業対応",
+  "main": "server.cjs",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "python test_selenium.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muumuu8181/accordion-task.git"
+  },
+  "keywords": [
+    "task-management",
+    "accordion",
+    "hierarchy",
+    "ai-collaboration",
+    "gist",
+    "github"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 一時ファイル
+*.tmp
+*.temp
+tasks.md
+gist-payload.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ローカル設定
+.env
+.env.local
+
+# ログファイル
+*.log
+
+# テスト関連
+__pycache__/
+*.pyc
+.pytest_cache/
