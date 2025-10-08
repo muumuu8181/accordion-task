@@ -217,9 +217,11 @@ class TaskUI {
         this.levelFilter = document.getElementById('levelFilter');
         this.clearFilterBtn = document.getElementById('clearFilter');
         this.exportBtn = document.getElementById('exportToGitHub');
+        this.toggleSpecialInstructionBtn = document.getElementById('toggleSpecialInstruction');
         this.activeSubtaskForm = null;
         this.currentFilter = '';
         this.currentLevelFilter = '';
+        this.specialInstructionMode = false;
 
         this.initEventListeners();
         this.render();
@@ -248,6 +250,16 @@ class TaskUI {
             this.applyFilter();
         });
         this.exportBtn.addEventListener('click', () => this.handleExport());
+        this.toggleSpecialInstructionBtn.addEventListener('click', () => this.handleToggleSpecialInstruction());
+    }
+
+    handleToggleSpecialInstruction() {
+        this.specialInstructionMode = !this.specialInstructionMode;
+        if (this.specialInstructionMode) {
+            this.toggleSpecialInstructionBtn.classList.add('active');
+        } else {
+            this.toggleSpecialInstructionBtn.classList.remove('active');
+        }
     }
 
     async handleExport() {
@@ -309,12 +321,20 @@ class TaskUI {
     }
 
     handleAddTask() {
-        const text = this.newTaskInput.value.trim();
+        let text = this.newTaskInput.value.trim();
         const priority1 = document.getElementById('newTaskPriority1').value || null;
         const priority2 = document.getElementById('newTaskPriority2').value || null;
         const deadline = document.getElementById('newTaskDeadline').value || null;
 
         if (text) {
+            // 個別指示モードがONの場合、先頭に付加
+            if (this.specialInstructionMode) {
+                text = '(個別指示) ' + text;
+                // モードをOFFに戻す
+                this.specialInstructionMode = false;
+                this.toggleSpecialInstructionBtn.classList.remove('active');
+            }
+
             this.taskManager.addTask(text, null, 1, priority1, priority2, deadline);
             this.newTaskInput.value = '';
             document.getElementById('newTaskPriority1').value = '';

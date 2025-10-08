@@ -211,6 +211,31 @@ h1 {
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
+.btn-special-instruction {
+    padding: 10px 20px;
+    border: 2px solid #f59e0b;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-special-instruction:hover {
+    background: #fde68a;
+    border-color: #d97706;
+    transform: translateY(-1px);
+}
+
+.btn-special-instruction.active {
+    background: #f59e0b;
+    color: white;
+    border-color: #d97706;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
 .task-list {
     max-height: 1020px;
     overflow-y: auto;
