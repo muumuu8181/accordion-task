@@ -229,6 +229,21 @@ hierarchical-task-manager/
 - **TaskManager**: タスクデータの管理・操作・永続化
 - **TaskUI**: DOM操作・イベント処理・レンダリング
 
+### タスクID設計
+
+このアプリでは**通し番号方式**（`#000001`, `#000002`...）を採用しています。
+
+階層方式（`#000001-1`, `#000001-1-1`...）を検討しましたが、以下の理由で通し番号を選択：
+
+- ✅ **IDの永続性**: タスク移動時もIDが変わらない
+- ✅ **シンプルな実装**: バグが少なく保守しやすい
+- ✅ **業界標準**: GitHub Issue、Jiraと同じ方式
+- ✅ **AI協調作業**: IDの変更による混乱を防ぐ
+
+階層構造はMarkdownのインデントで明確に表現されます。
+
+詳細は [タスクID設計方針](docs/TASK_ID_DESIGN.md) を参照してください。
+
 ## 🔧 トラブルシューティング
 
 ### "FAILED TO FETCH" エラーが出る
@@ -278,8 +293,13 @@ gh auth login
 
 ## 🔗 リンク
 
+### 外部リンク
 - **GitHubリポジトリ**: https://github.com/muumuu8181/accordion-task
 - **タスクリストGist**: https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+
+### ドキュメント
+- **タスクID設計方針**: [docs/TASK_ID_DESIGN.md](docs/TASK_ID_DESIGN.md) - なぜ通し番号を採用したか
+- **引き継ぎドキュメント**: [handover/HANDOVER.md](handover/HANDOVER.md) - プロジェクト引き継ぎ情報
 
 ## 📄 ライセンス
 
