@@ -192,7 +192,7 @@ h1 {
 }
 
 .task-list {
-    max-height: 600px;
+    max-height: 1020px;
     overflow-y: auto;
 }
 
