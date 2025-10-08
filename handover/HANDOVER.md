@@ -4,36 +4,36 @@
 
 **プロジェクト名**: 階層的タスク管理アプリ（Hierarchical Task Manager）
 **リポジトリ名**: accordion-task
-**現在バージョン**: v0.22
-**最終更新日**: 2025年10月7日
+**現在バージョン**: v0.23
+**最終更新日**: 2025年10月9日
 
 ## 📍 フルパス情報
 
 ### プロジェクトフォルダ
 ```
-C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 ```
 
 ### 主要ファイル
 
 | ファイル | フルパス | 用途 |
 |---------|---------|------|
-| **index.html** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\index.html` | メインHTMLファイル - UI構造 |
-| **style.css** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\style.css` | スタイルシート - デザイン・階層別色分け |
-| **script.js** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js` | フロントエンドロジック（TaskManager/TaskUIクラス） |
-| **server.cjs** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\server.cjs` | Node.jsサーバー - Gist API連携 |
-| **start.bat** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\start.bat` | Windows起動スクリプト |
-| **test_selenium.py** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\test_selenium.py` | Selenium自動テストスイート |
-| **README.md** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\README.md` | プロジェクト詳細ドキュメント |
-| **AI_PROMPT.md** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\AI_PROMPT.md` | AI協調作業指示書 |
-| **package.json** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\package.json` | Node.jsプロジェクト設定 |
-| **.gitignore** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\.gitignore` | Git除外設定 |
+| **index.html** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\index.html` | メインHTMLファイル - UI構造 |
+| **style.css** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\style.css` | スタイルシート - デザイン・階層別色分け |
+| **script.js** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\script.js` | フロントエンドロジック（TaskManager/TaskUIクラス） |
+| **server.cjs** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\server.cjs` | Node.jsサーバー - Gist API連携 |
+| **start.bat** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\start.bat` | Windows起動スクリプト |
+| **test_selenium.py** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\test_selenium.py` | Selenium自動テストスイート |
+| **README.md** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\README.md` | プロジェクト詳細ドキュメント |
+| **AI_PROMPT.md** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\AI_PROMPT.md` | AI協調作業指示書 |
+| **package.json** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\package.json` | Node.jsプロジェクト設定 |
+| **.gitignore** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\.gitignore` | Git除外設定 |
 
 ### Git情報
 
 | 項目 | 詳細 |
 |-----|------|
-| **Gitフォルダ** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\.git` |
+| **Gitフォルダ** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\.git` |
 | **リモートリポジトリ** | `https://github.com/muumuu8181/accordion-task.git` |
 | **ブランチ** | `master` |
 | **最新コミット** | `62977b3 - docs: Add quick handover guide for new members` |
@@ -63,7 +63,7 @@ C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
 
 1. エクスプローラーで以下のパスを開く:
    ```
-   C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+   C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
    ```
 
 2. `start.bat` をダブルクリック
@@ -74,7 +74,7 @@ C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
 
 ```bash
 # フォルダに移動
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
 # サーバー起動
 node server.cjs
@@ -85,7 +85,7 @@ node server.cjs
 ### 方法3: npmスクリプト起動
 
 ```bash
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 npm start
 ```
 
@@ -129,7 +129,7 @@ npm start
 
 AIに以下のファイルを提供:
 ```
-C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\AI_PROMPT.md
+C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\AI_PROMPT.md
 ```
 
 または、以下の指示を直接コピー:
@@ -148,7 +148,7 @@ https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
 
 ```bash
 # フォルダに移動
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
 # Seleniumインストール（初回のみ）
 pip install selenium
@@ -160,7 +160,7 @@ python test_selenium.py
 または
 
 ```bash
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 npm test
 ```
 
@@ -237,7 +237,7 @@ npm test
 
 既存タスクにIDが無い場合、自動的に割り当てる機能:
 
-**実装場所**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js` (183-204行目)
+**実装場所**: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\script.js` (183-204行目)
 
 ```javascript
 migrateTaskIds() {
@@ -268,7 +268,7 @@ migrateTaskIds() {
 
 親タスクと子タスクの両方をチェックするフィルター機能:
 
-**実装場所**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js` (592-650行目)
+**実装場所**: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\script.js` (592-650行目)
 
 - 子タスクがマッチする場合、親タスクも表示
 - `:scope >` セレクタで直接の子要素のみを検索
@@ -278,7 +278,7 @@ migrateTaskIds() {
 
 JSONペイロードファイルを使用して改行を保持:
 
-**実装場所**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\server.cjs` (44-69行目)
+**実装場所**: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\server.cjs` (44-69行目)
 
 ```javascript
 const payload = {
@@ -329,7 +329,7 @@ execSync(`gh api gists/${gistId} -X PATCH --input "${payloadFile}"`, { encoding:
 
 ### 3. ポート競合
 - デフォルトポート: 3000
-- 変更方法: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\server.cjs` の `PORT` 変数を編集
+- 変更方法: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\server.cjs` の `PORT` 変数を編集
 
 ### 4. データバックアップ
 - LocalStorageは手動バックアップ不可
@@ -349,7 +349,7 @@ execSync(`gh api gists/${gistId} -X PATCH --input "${payloadFile}"`, { encoding:
 
 **解決方法**:
 ```bash
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 node server.cjs
 ```
 その後 `http://localhost:3000` にアクセス
@@ -385,9 +385,9 @@ gh auth login
 
 | ドキュメント | パス | 用途 |
 |------------|------|------|
-| **README.md** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\README.md` | 包括的な使用方法 |
-| **AI_PROMPT.md** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\AI_PROMPT.md` | AI作業指示 |
-| **HANDOVER.md** | `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\HANDOVER.md` | このファイル |
+| **README.md** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\README.md` | 包括的な使用方法 |
+| **AI_PROMPT.md** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\AI_PROMPT.md` | AI作業指示 |
+| **HANDOVER.md** | `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\HANDOVER.md` | このファイル |
 
 ### リポジトリ情報
 
@@ -397,7 +397,7 @@ gh auth login
 ### コミットログ確認
 
 ```bash
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 git log --oneline
 ```
 
@@ -442,15 +442,15 @@ pip install selenium
 ### コードベースの理解
 
 1. **基本構造の理解**:
-   - `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\index.html` - DOM構造を確認
-   - `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\style.css` - スタイルと色分けを確認
+   - `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\index.html` - DOM構造を確認
+   - `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\style.css` - スタイルと色分けを確認
 
 2. **ロジックの理解**:
-   - `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js` - TaskManagerクラス（2-205行目）
-   - `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js` - TaskUIクラス（208-651行目）
+   - `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\script.js` - TaskManagerクラス（2-205行目）
+   - `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\script.js` - TaskUIクラス（208-651行目）
 
 3. **API連携の理解**:
-   - `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\server.cjs` - Gist APIエンドポイント（33-98行目）
+   - `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\server.cjs` - Gist APIエンドポイント（33-98行目）
 
 ### 推奨学習順序
 
@@ -466,7 +466,7 @@ pip install selenium
 
 ```bash
 # フォルダに移動
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
 # 最新の状態を取得
 git pull origin master
@@ -486,14 +486,14 @@ git push origin master
 
 ### バージョン番号の更新
 
-1. `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\package.json` の `version` を更新
-2. `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\index.html` の14行目 `<span class="version">v0.22</span>` を更新
-3. `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\README.md` のバージョン履歴に追記
+1. `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\package.json` の `version` を更新
+2. `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\index.html` の14行目 `<span class="version">v0.22</span>` を更新
+3. `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\README.md` のバージョン履歴に追記
 
 ### リリース手順
 
 ```bash
-cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
 # タグ作成
 git tag v0.23
@@ -506,7 +506,7 @@ git push origin v0.23
 
 ### 新規担当者が確認すべきこと
 
-- [ ] プロジェクトフォルダにアクセスできる: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager`
+- [ ] プロジェクトフォルダにアクセスできる: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task`
 - [ ] Node.jsがインストールされている（v14以降）
 - [ ] GitHub CLIがインストール・認証されている
 - [ ] サーバーが起動できる（`node server.cjs`）
@@ -522,7 +522,7 @@ git push origin v0.23
 
 ### 質問がある場合
 
-1. まず `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\README.md` を確認
+1. まず `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\README.md` を確認
 2. コミットログを確認: `git log --oneline --graph`
 3. GitHubのIssuesで検索・質問
 
@@ -538,10 +538,10 @@ git push origin v0.23
 
 ---
 
-**最終更新**: 2025年10月7日
+**最終更新**: 2025年10月9日
 **作成者**: Claude (AI)
-**バージョン**: v0.22
-**ドキュメントパス**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md`
+**バージョン**: v0.23
+**ドキュメントパス**: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\handover\HANDOVER.md`
 
 ## 📌 CLAUDE.mdについて
 

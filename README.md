@@ -176,7 +176,7 @@ python test_selenium.py
 ## 📁 ファイル構成
 
 ```
-hierarchical-task-manager/
+accordion-task/
 ├── index.html          # メインHTML - アプリケーションのUI構造
 ├── style.css           # スタイルシート - デザインと階層別色分け
 ├── script.js           # フロントエンドロジック - TaskManager/TaskUIクラス
@@ -287,6 +287,7 @@ gh auth login
 
 | バージョン | 変更内容 |
 |----------|---------|
+| v0.23 | レベルフィルター機能追加・ボタン色分け・プロジェクト名統一（accordion-task） |
 | v0.22 | タスクID機能実装・既存タスクへの自動マイグレーション |
 | v0.20 | Gist更新時の改行エスケープ問題修正（JSONペイロード方式） |
 | v0.19 | Gist作成をSecret（非公開）に変更 |

@@ -6,32 +6,32 @@
   accordion-task（階層的タスク管理アプリ）
 
 ■ 最重要：まず最初に読むべきドキュメント
-  パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
+  パス: C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\handover\HANDOVER.md
 
   ↑このファイルに全ての情報が記載されています。
     必ず最初にこのファイルを開いて、全体像を把握してください。
 
 ■ プロジェクトフォルダ
-  C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+  C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
 ■ 主要ドキュメント（優先度順）
 
   1. 引き継ぎドキュメント（必読）
-     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
+     C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\handover\HANDOVER.md
      → 全ファイルのフルパス、起動方法、使い方、トラブルシューティング等
 
   2. プロジェクト説明書（詳細な使い方）
-     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\README.md
+     C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\README.md
      → 機能詳細、技術スタック、インストール方法、使用方法
 
   3. AI協調作業指示書（AI利用時）
-     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\AI_PROMPT.md
+     C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\AI_PROMPT.md
      → 複数AIでタスクを処理する場合の手順
 
 ■ クイックスタート（3ステップ）
 
   ステップ1: プロジェクトフォルダを開く
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
   ステップ2: サーバーを起動
     方法A: start.bat をダブルクリック（Windows推奨）
@@ -51,20 +51,20 @@
 ■ 主要ファイル一覧
 
   【フロントエンド】
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\index.html
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\style.css
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\script.js
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\index.html
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\style.css
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\script.js
 
   【バックエンド】
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\server.cjs
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\server.cjs
 
   【起動・テスト】
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\start.bat
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\test_selenium.py
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\start.bat
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\test_selenium.py
 
   【設定】
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\package.json
-    C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\.gitignore
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\package.json
+    C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\.gitignore
 
 ■ 前提条件（必要なソフトウェア）
 
@@ -91,7 +91,7 @@
 
   Q4: どこから手を付ければいい？
   A4: まず HANDOVER.md を読んでください。
-      パス: C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
+      パス: C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\handover\HANDOVER.md
 
 ■ 緊急連絡先・サポート
 
@@ -99,12 +99,12 @@
     https://github.com/muumuu8181/accordion-task/issues
 
   コミットログ確認:
-    cd C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager
+    cd C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
     git log --oneline
 
 ■ プロジェクト構造（簡易版）
 
-  hierarchical-task-manager/
+  accordion-task/
   ├── handover/                 ← 引き継ぎドキュメント（ここ！）
   │   ├── HANDOVER.md           ← 詳細な引き継ぎ情報
   │   └── 第三者への引き継ぎ指示.txt ← このファイル
@@ -122,7 +122,7 @@
 ■ 次のアクション
 
   ☐ HANDOVER.md を開いて読む
-     C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager\handover\HANDOVER.md
+     C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\handover\HANDOVER.md
 
   ☐ Node.jsがインストールされているか確認
      コマンド: node --version
@@ -139,6 +139,6 @@
 
 ==============================================================================
 作成日: 2025年10月8日
-バージョン: v0.22
-最終更新コミット: 62977b3
+バージョン: v0.23
+最終更新日: 2025年10月9日
 ==============================================================================

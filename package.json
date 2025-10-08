@@ -1,6 +1,6 @@
 {
-  "name": "hierarchical-task-manager",
-  "version": "0.22.0",
+  "name": "accordion-task",
+  "version": "0.23.0",
   "description": "4階層タスク管理アプリケーション - AI協調作業対応",
   "main": "server.cjs",
   "scripts": {

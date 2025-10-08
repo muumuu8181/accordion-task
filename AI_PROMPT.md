@@ -60,8 +60,8 @@ https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
 ## 🛠️ プロジェクト情報
 
 - **リポジトリ**: accordion-task
-- **バージョン**: v0.22
-- **作業フォルダ**: `C:\Users\user\Desktop\work\90_cc\20251006\hierarchical-task-manager`
+- **バージョン**: v0.23
+- **作業フォルダ**: `C:\Users\user\Desktop\work\90_cc\20251006\accordion-task`
 
 ## 🔗 関連リンク
 
