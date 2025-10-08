@@ -93,8 +93,8 @@ h1 {
 .btn-clear-filter {
     padding: 8px 16px;
     border: 2px solid #9ca3af;
-    background: white;
-    color: #6b7280;
+    background: #fef3c7;
+    color: #92400e;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -103,16 +103,16 @@ h1 {
 }
 
 .btn-clear-filter:hover {
-    background: #f3f4f6;
-    border-color: #6b7280;
-    color: #374151;
+    background: #fde68a;
+    border-color: #78716c;
+    color: #78350f;
 }
 
 .btn-control {
     padding: 8px 16px;
-    border: 2px solid #667eea;
-    background: white;
-    color: #667eea;
+    border: 2px solid #0891b2;
+    background: #cffafe;
+    color: #155e75;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -121,16 +121,17 @@ h1 {
 }
 
 .btn-control:hover {
-    background: #667eea;
+    background: #06b6d4;
     color: white;
+    border-color: #0891b2;
     transform: translateY(-2px);
 }
 
 .btn-toggle {
     padding: 8px 16px;
-    border: 2px solid #6b7280;
-    background: #f3f4f6;
-    color: #374151;
+    border: 2px solid #a78bfa;
+    background: #ede9fe;
+    color: #5b21b6;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -139,8 +140,9 @@ h1 {
 }
 
 .btn-toggle:hover {
-    background: #6b7280;
+    background: #a78bfa;
     color: white;
+    border-color: #7c3aed;
     transform: translateY(-2px);
 }
 
