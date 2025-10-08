@@ -15,7 +15,7 @@
             </div>
             <div class="controls">
                 <div class="filter-section">
-                    <label>フィルター:
+                    <label>重要度:
                         <select id="priorityFilter">
                             <option value="">すべて</option>
                             <option value="S">S (SS, SA, SB, SC)</option>
@@ -23,6 +23,15 @@
                             <option value="B">B (BS, BA, BB, BC)</option>
                             <option value="C">C (CS, CA, CB, CC)</option>
                             <option value="unset">未設定のみ</option>
+                        </select>
+                    </label>
+                    <label>階層:
+                        <select id="levelFilter">
+                            <option value="">すべて</option>
+                            <option value="1">階層1のみ</option>
+                            <option value="2">階層2のみ</option>
+                            <option value="3">階層3のみ</option>
+                            <option value="4">階層4のみ</option>
                         </select>
                     </label>
                     <button id="clearFilter" class="btn-clear-filter">クリア</button>

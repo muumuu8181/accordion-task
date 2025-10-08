@@ -214,10 +214,12 @@ class TaskUI {
         this.expandAllBtn = document.getElementById('expandAll');
         this.collapseAllBtn = document.getElementById('collapseAll');
         this.priorityFilter = document.getElementById('priorityFilter');
+        this.levelFilter = document.getElementById('levelFilter');
         this.clearFilterBtn = document.getElementById('clearFilter');
         this.exportBtn = document.getElementById('exportToGitHub');
         this.activeSubtaskForm = null;
         this.currentFilter = '';
+        this.currentLevelFilter = '';
 
         this.initEventListeners();
         this.render();
@@ -234,9 +236,15 @@ class TaskUI {
             this.currentFilter = e.target.value;
             this.applyFilter();
         });
+        this.levelFilter.addEventListener('change', (e) => {
+            this.currentLevelFilter = e.target.value;
+            this.applyFilter();
+        });
         this.clearFilterBtn.addEventListener('click', () => {
             this.priorityFilter.value = '';
+            this.levelFilter.value = '';
             this.currentFilter = '';
+            this.currentLevelFilter = '';
             this.applyFilter();
         });
         this.exportBtn.addEventListener('click', () => this.handleExport());
@@ -356,7 +364,7 @@ class TaskUI {
         const deadlineText = task.deadline ? `期限: ${task.deadline}` : '';
 
         taskDiv.innerHTML = `
-            <div class="task-header ${priorityClass}" data-priority1="${task.priority1 || ''}" data-priority2="${task.priority2 || ''}">
+            <div class="task-header ${priorityClass}" data-priority1="${task.priority1 || ''}" data-priority2="${task.priority2 || ''}" data-level="${task.level}">
                 ${hasChildren ? `
                     <button class="toggle-btn ${task.expanded ? '' : 'collapsed'}">
                         ▼
@@ -591,7 +599,7 @@ class TaskUI {
 
     applyFilter() {
         // フィルターなしの場合はすべて表示
-        if (!this.currentFilter) {
+        if (!this.currentFilter && !this.currentLevelFilter) {
             document.querySelectorAll('.task-item').forEach(item => {
                 item.style.display = '';
             });
@@ -603,14 +611,26 @@ class TaskUI {
             const header = item.querySelector(':scope > .task-header');
             const priority1 = header.dataset.priority1;
             const priority2 = header.dataset.priority2;
+            const level = header.dataset.level;
 
-            let match = false;
+            let priorityMatch = true;
+            let levelMatch = true;
 
-            if (this.currentFilter === 'unset') {
-                match = !priority1 || !priority2;
-            } else {
-                match = priority1 === this.currentFilter;
+            // 重要度フィルタチェック
+            if (this.currentFilter) {
+                if (this.currentFilter === 'unset') {
+                    priorityMatch = !priority1 || !priority2;
+                } else {
+                    priorityMatch = priority1 === this.currentFilter;
+                }
             }
+
+            // 階層フィルタチェック
+            if (this.currentLevelFilter) {
+                levelMatch = level === this.currentLevelFilter;
+            }
+
+            let match = priorityMatch && levelMatch;
 
             // サブタスクをチェック
             const subtasksContainer = item.querySelector(':scope > .subtasks');
