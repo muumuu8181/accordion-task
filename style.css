@@ -126,6 +126,24 @@ h1 {
     transform: translateY(-2px);
 }
 
+.btn-toggle {
+    padding: 8px 16px;
+    border: 2px solid #6b7280;
+    background: #f3f4f6;
+    color: #374151;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-toggle:hover {
+    background: #6b7280;
+    color: white;
+    transform: translateY(-2px);
+}
+
 .add-task-section {
     display: flex;
     flex-wrap: wrap;
