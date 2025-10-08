@@ -244,6 +244,16 @@ hierarchical-task-manager/
 
 詳細は [タスクID設計方針](docs/TASK_ID_DESIGN.md) を参照してください。
 
+### 優先順位システム（検討中）
+
+**2次元重要度**（S/A/B/C × S/A/B/C）と**階層**の関係について、優先順位の判定方法を検討中です。
+
+**課題:**
+- 階層1のAAタスク vs 階層2のSSタスク、どちらを優先すべきか？
+- 点数化システムの導入を検討（階層基礎点 + 重要度点）
+
+詳細は [優先順位システム](docs/PRIORITY_SYSTEM.md) を参照してください。
+
 ## 🔧 トラブルシューティング
 
 ### "FAILED TO FETCH" エラーが出る
@@ -299,6 +309,7 @@ gh auth login
 
 ### ドキュメント
 - **タスクID設計方針**: [docs/TASK_ID_DESIGN.md](docs/TASK_ID_DESIGN.md) - なぜ通し番号を採用したか
+- **優先順位システム**: [docs/PRIORITY_SYSTEM.md](docs/PRIORITY_SYSTEM.md) - 階層と重要度の優先順位（検討中）
 - **引き継ぎドキュメント**: [handover/HANDOVER.md](handover/HANDOVER.md) - プロジェクト引き継ぎ情報
 
 ## 📄 ライセンス
