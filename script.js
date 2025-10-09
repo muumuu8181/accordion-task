@@ -217,11 +217,14 @@ class TaskUI {
         this.levelFilter = document.getElementById('levelFilter');
         this.clearFilterBtn = document.getElementById('clearFilter');
         this.exportBtn = document.getElementById('exportToGitHub');
+        this.copyGistUrlBtn = document.getElementById('copyGistUrl');
+        this.openGistBtn = document.getElementById('openGist');
         this.toggleSpecialInstructionBtn = document.getElementById('toggleSpecialInstruction');
         this.activeSubtaskForm = null;
         this.currentFilter = '';
         this.currentLevelFilter = '';
         this.specialInstructionMode = false;
+        this.defaultGistId = 'bc84a882462441ec756f854a816c9c77'; // 正しいGist ID
 
         this.initEventListeners();
         this.render();
@@ -250,6 +253,8 @@ class TaskUI {
             this.applyFilter();
         });
         this.exportBtn.addEventListener('click', () => this.handleExport());
+        this.copyGistUrlBtn.addEventListener('click', () => this.handleCopyGistUrl());
+        this.openGistBtn.addEventListener('click', () => this.handleOpenGist());
         this.toggleSpecialInstructionBtn.addEventListener('click', () => this.handleToggleSpecialInstruction());
     }
 
@@ -260,6 +265,28 @@ class TaskUI {
         } else {
             this.toggleSpecialInstructionBtn.classList.remove('active');
         }
+    }
+
+    handleCopyGistUrl() {
+        const gistId = localStorage.getItem('gistId') || this.defaultGistId;
+        const gistUrl = `https://gist.github.com/muumuu8181/${gistId}`;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(gistUrl).then(() => {
+                alert(`✅ Gist URLをクリップボードにコピーしました！\n\n${gistUrl}`);
+            }).catch(err => {
+                console.error('コピー失敗:', err);
+                prompt('以下のURLをコピーしてください:', gistUrl);
+            });
+        } else {
+            prompt('以下のURLをコピーしてください:', gistUrl);
+        }
+    }
+
+    handleOpenGist() {
+        const gistId = localStorage.getItem('gistId') || this.defaultGistId;
+        const gistUrl = `https://gist.github.com/muumuu8181/${gistId}`;
+        window.open(gistUrl, '_blank');
     }
 
     async handleExport() {

@@ -42,7 +42,7 @@ C:\Users\user\Desktop\work\90_cc\20251006\accordion-task
 
 ### GitHub関連
 - **リポジトリ**: https://github.com/muumuu8181/accordion-task
-- **タスクリストGist**: https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+- **タスクリストGist**: https://gist.github.com/muumuu8181/bc84a882462441ec756f854a816c9c77
 
 ### アクセスURL
 - **ローカル開発サーバー**: http://localhost:3000
@@ -123,7 +123,7 @@ npm start
    ```
 
 2. Gistにタスクリストがエクスポート済み
-   - Gist URL: https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+   - Gist URL: https://gist.github.com/muumuu8181/bc84a882462441ec756f854a816c9c77
 
 ### AIへの指示方法
 
@@ -136,7 +136,7 @@ C:\Users\user\Desktop\work\90_cc\20251006\accordion-task\AI_PROMPT.md
 
 ```
 このプロジェクトのタスクリストは以下のGistで管理されています：
-https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+https://gist.github.com/muumuu8181/bc84a882462441ec756f854a816c9c77
 
 上記GistのタスクリストからタスクID（#000001など）を確認して、
 作業を開始してください。作業内容はGistに記録してください。
@@ -173,7 +173,7 @@ npm test
 - **永続性**: ブラウザを閉じても保持される
 
 ### GitHub Gist
-- **URL**: https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+- **URL**: https://gist.github.com/muumuu8181/bc84a882462441ec756f854a816c9c77
 - **ファイル名**: `tasks.md`
 - **形式**: Markdown
 - **更新**: 「GitHubエクスポート」ボタンで手動更新
@@ -181,7 +181,7 @@ npm test
 ### Gist ID保存
 - **保存先**: LocalStorage
 - **キー**: `gistId`
-- **値**: `e90d418b603582a671b2f3865edf4060`
+- **値**: `bc84a882462441ec756f854a816c9c77`
 - **用途**: 既存Gistの更新に使用
 
 ## 🔧 技術スタック

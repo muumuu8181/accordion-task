@@ -306,7 +306,7 @@ gh auth login
 
 ### 外部リンク
 - **GitHubリポジトリ**: https://github.com/muumuu8181/accordion-task
-- **タスクリストGist**: https://gist.github.com/muumuu8181/e90d418b603582a671b2f3865edf4060
+- **タスクリストGist**: https://gist.github.com/muumuu8181/bc84a882462441ec756f854a816c9c77
 
 ### ドキュメント
 - **タスクID設計方針**: [docs/TASK_ID_DESIGN.md](docs/TASK_ID_DESIGN.md) - なぜ通し番号を採用したか

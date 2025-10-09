@@ -127,6 +127,25 @@ h1 {
     transform: translateY(-2px);
 }
 
+.btn-gist-action {
+    padding: 8px 16px;
+    border: 2px solid #10b981;
+    background: #d1fae5;
+    color: #065f46;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-gist-action:hover {
+    background: #10b981;
+    color: white;
+    border-color: #059669;
+    transform: translateY(-2px);
+}
+
 .btn-toggle {
     padding: 8px 16px;
     border: 2px solid #a78bfa;
